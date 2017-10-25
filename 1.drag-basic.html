@@ -1,0 +1,22 @@
+<style>
+  #p1 {
+    background-color: red;
+    width: 200px;
+  }
+</style>
+
+<body>
+  <p id="p1" draggable="true" ondragstart="dragstart_handler(event);">This element is draggable.</p>
+  <p id="p2">This element is NOT draggable.</p>
+  <script>
+    window.addEventListener('drag', (e) => { console.log(e.type); })
+    window.addEventListener('dragstart', (e) => { console.log(e.type); })
+    window.addEventListener('dragend', (e) => { console.log(e.type); })
+
+    function dragstart_handler(ev) {
+      console.log("dragstart handler");
+      // Add the target element's id to the data transfer object
+      ev.dataTransfer.setData("text/plain", ev.target.id);
+    }
+  </script>
+</body>
