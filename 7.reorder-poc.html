@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+  <title>Reordering</title>
+  <link rel="stylesheet" href="style.css">
+  <!--
+           This example demonstrates using various HTML Drag and Drop interfaces including:
+           * Global "draggable" attribute
+           * Event handlers for dragstart, dragover and drop
+           * Global event handlers for ondragstart, ondragover and ondrop
+           * Using the DataTransfer interface to copy and move elements (<div>)
+        -->
+  <style>
+    div {
+      margin: 0em;
+      padding: 2em;
+    }
+
+    .item {
+      border: 1px solid blue;
+      margin: 10px;
+      padding: 20px;
+      width: 100px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="code">
+    <div id="1" class="item" draggable="true"
+      ondragstart="dragstart_handler(event)"
+      ondrop="drop_handler(event)"
+      ondragover="dragover_handler(event)">1</div>
+    <div id="2" class="item" draggable="true"
+      ondragstart="dragstart_handler(event)"
+      ondrop="drop_handler(event)"
+      ondragover="dragover_handler(event)">2</div>
+    <div id="3" class="item" draggable="true"
+      ondragstart="dragstart_handler(event)"
+      ondrop="drop_handler(event)"
+      ondragover="dragover_handler(event)">3</div>
+    <script>
+      function dragstart_handler(ev) {
+        ev.dataTransfer.dropEffect = "move";
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+      function drop_handler(ev) {
+        var id = ev.dataTransfer.getData("text");
+        console.log("drop", ev.currentTarget, ev.target, id)
+        document.getElementById("code").insertBefore(
+          ev.target,
+          document.getElementById(id))
+        ev.preventDefault();
+      }
+      function dragover_handler(ev) {
+        console.log("dragover", ev.currentTarget, ev.target)
+        ev.preventDefault();
+      }
+    </script>
+  </div>
+
+  <pre><code id="text"></code></pre>
+  <script src="script.js" />
+</body>
+
+</html>
