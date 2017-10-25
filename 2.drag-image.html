@@ -1,6 +1,3 @@
-<!-- Needed to ensure image appears immediately. -->
-<link rel="preload" href="barney.png" as="image"></link>
-
 <style>
   #p1 {
     background-color: red;
@@ -12,15 +9,14 @@
   <p id="p1" draggable="true" ondragstart="dragstart_handler(event);">This element is draggable.</p>
   <p id="p2">This element is NOT draggable.</p>
   <script>
+    // var img = new Image(30, 30); // Does not work
+    var dragImage = new Image(); // Image original size
+    dragImage.src = 'barney.png';
+
     function dragstart_handler(ev) {
       console.log("dragstart handler");
 
-      // var img = new Image(30, 30); // Does not work
-      var img = new Image(); // Image original size
-      img.src = 'barney.png';
-
-      // x and y offsets mouse pointer relative to top left image
-      ev.dataTransfer.setDragImage(img, 75, 75);
+      ev.dataTransfer.setDragImage(dragImage, 75, 75);
     }
   </script>
 </body>
