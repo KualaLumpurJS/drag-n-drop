@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="style.css">
+<style>
+  #copy1, #copy2, #copy3 {
+    color: white;
+    background-color: red;
+    width: 200px;
+  }
+
+  .dropzone {
+    width: 300px;
+    height: 300px;
+    background-color: green;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<body>
+  <div id="code">
+    <p id="copy1" draggable="true" ondragstart="dragstart_handler_foo(event)">FOO</p>
+    <p id="copy2" draggable="true" ondragstart="dragstart_handler_bar(event)">BAR</p>
+    <p id="copy3" draggable="true" ondragstart="dragstart_handler_bar2(event)">BAR BAR</p>
+    <div class="dropzone" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">DROPZONE (I ONLY LIKE PLAIN BARS)</div>
+    <script>
+      function dragstart_handler_foo(ev) {
+        ev.dataTransfer.dropEffect = "copy";
+        ev.dataTransfer.setData("text/html", "<h1>FOO</h1>")
+      }
+      function dragstart_handler_bar(ev) {
+        ev.dataTransfer.dropEffect = "copy";
+        ev.dataTransfer.setData("text/plain", "BAR")
+      }
+      function dragstart_handler_bar2(ev) {
+        ev.dataTransfer.dropEffect = "copy";
+        ev.dataTransfer.setData("text/plain", "BAR BAR")
+      }
+
+
+      function drop_handler(ev) {
+        console.log(ev);
+        var data = event.dataTransfer.getData("text/plain");
+        if (data.split(" ").length > 1) {
+          event.target.textContent = data;
+          ev.preventDefault(); // IMPORTANT
+        }
+      }
+      function dragover_handler(ev) {
+        console.log(ev.dataTransfer.types);
+        if (ev.dataTransfer.types.includes("text/plain")) {
+          ev.preventDefault(); // IMPORTANT
+        }
+      }
+    </script>
+</div>
+<code id="text"></code>
+<script src="script.js" />
+</body>
+</body>
