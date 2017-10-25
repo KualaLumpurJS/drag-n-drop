@@ -1,0 +1,12 @@
+body {
+  display: flex;
+}
+
+body > * {
+  flex: 1;
+}
+
+#text {
+  margin-left: 20px;
+  font-size: 16px;
+}

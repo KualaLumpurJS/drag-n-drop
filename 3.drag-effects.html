@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="style.css">
+<style>
+  #copy,
+  #move,
+  #link {
+    color: white;
+    background-color: red;
+    width: 200px;
+  }
+
+  .dropzone {
+    width: 300px;
+    height: 300px;
+    background-color: green;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<body>
+  <div id="code">
+    <p id="copy" draggable="true" ondragstart="dragstart_handler_copy(event);">This element is COPY-able.</p>
+    <p id="move" draggable="true" ondragstart="dragstart_handler_move(event);">This element is MOVE-able.</p>
+    <p id="link" draggable="true" ondragstart="dragstart_handler_link(event);">This element is LINK-able.</p>
+    <p id="p2">This element is NOT draggable.</p>
+    <h1>
+      So that an element becomes a drop zone or is droppable, the element must have both
+      <code>ondragover</code> and
+      <code>ondrop</code> event handler attributes.
+
+      <p>If you want to allow a drop, you must prevent the default handling by cancelling
+        the event.</p>
+    </h1>
+    <div class="dropzone" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">DROPZONE</div>
+    <script>
+      function dragstart_handler_copy(ev) {
+        console.log("dragstart handler copy");
+        ev.dataTransfer.dropEffect = "copy";
+      }
+      function dragstart_handler_move(ev) {
+        console.log("dragstart handler move");
+        ev.dataTransfer.dropEffect = "move";
+      }
+      function dragstart_handler_link(ev) {
+        console.log("dragstart handler link");
+        ev.dataTransfer.dropEffect = "link";
+      }
+
+
+      function drop_handler(ev) {
+        ev.preventDefault(); // IMPORTANT
+      }
+      function dragover_handler(ev) {
+        ev.preventDefault(); // IMPORTANT
+      }
+    </script>
+</div>
+<code id="text"></code>
+<script src="script.js" />
+</body>
+</body>
